@@ -100,6 +100,7 @@ fun ScaffoldExample() {
                 FloatingActionButton(
                     onClick = {},
                     shape = MaterialTheme.shapes.extraLarge,
+
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
