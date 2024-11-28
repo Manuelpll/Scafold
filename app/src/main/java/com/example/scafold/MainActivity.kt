@@ -50,7 +50,7 @@ fun ScaffoldExample() {
     FilmList.add(Pelicula("Arceus y la joya de la vida", "Nick Ficano", R.drawable.arceus_y_la_joya_de_la_vida))
     FilmList.add(Pelicula("The amazing Spiderman", "Marc Webb", R.drawable.the_amazing_spiderman))
     FilmList.add(Pelicula("Cars", "John Lasseter", R.drawable.cars))
-
+    FilmList.add(Pelicula("Ted", "Seth MacFarlane", R.drawable.ted))
     Scaffold(
         topBar = {
             TopAppBar(
@@ -79,19 +79,7 @@ fun ScaffoldExample() {
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             )
-        }/*,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {},
-                shape = MaterialTheme.shapes.extraLarge,
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add",
-
-                )
-            }
-        }*/,
+        },
         bottomBar = {
 
             BottomAppBar(
@@ -123,7 +111,11 @@ fun ScaffoldExample() {
             }
         } ,
     ) { innerPadding ->
-       LazyColumn {
+       LazyColumn(
+           contentPadding = innerPadding,
+           modifier = Modifier.fillMaxSize()
+
+       ) {
            items(FilmList) { pelicula ->
                Estruture(pelicula.titulo, pelicula.director, pelicula.image, innerPadding)
        }
@@ -134,8 +126,8 @@ fun ScaffoldExample() {
 fun Estruture(titulo: String, director: String, image: Int, innerPadding: PaddingValues) {
     Box(
         modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize(),
+            .padding(8.dp)
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -150,8 +142,8 @@ fun Estruture(titulo: String, director: String, image: Int, innerPadding: Paddin
                 contentDescription = "Poster de la película",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(80.dp) // Tamaño más compacto
-                    .padding(8.dp) // Espaciado uniforme más pequeño
+                    .size(120.dp)
+                    .padding(8.dp)
             )
 
             Column(
@@ -163,7 +155,7 @@ fun Estruture(titulo: String, director: String, image: Int, innerPadding: Paddin
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Start
                 )
-                Spacer(modifier = Modifier.height(2.dp)) // Espaciado reducido
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = "Director/es: $director",
                     style = MaterialTheme.typography.bodyMedium,
@@ -174,103 +166,12 @@ fun Estruture(titulo: String, director: String, image: Int, innerPadding: Paddin
     }
 }
 
-    /*data class Person(val name: String, val age: Int)
-@Composable
-fun NumerList(){
-    val persons = listOf(
-        Person("Juan", 25),
-        Person("María", 30),
-        Person("Pedro", 35),
-        Person("Ana",23 ))
-    LazyColumn{
-        items(persons.size) { index ->
-            Text(text = "Name: ${persons[index].name}, \nAge: ${persons[index].age}\n---------")
-        }
-    }
-}
 
-@Composable
-fun SimpleStringList() {
-    // List of fruit names
-    val fruits = listOf("Apple", "Banana", "Orange", "Mango", "Grapes")
-
-// LazyColumn to display the list
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()     // Fill the available height and width
-            .padding(16.dp)    // Add padding around the LazyColumn
-    ) {
-        // Use the items function to iterate over the list
-        items(fruits) { fruit ->
-            // Display each fruit name using a Text composable
-            Text(
-                text = fruit,
-                modifier = Modifier
-                    .padding(8.dp)       // Add padding around each item
-                    .fillMaxWidth(),     // Make each item fill the available width
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
-    }
-}
-// Data class representing a User
-data class User(val name: String, val email: String)
-
-// Function to simulate fetching user data
-fun getUserData(): List<User> {
-    return listOf(
-        User("John Doe", "john@example.com"),
-        User("Jane Doe", "jane@example.com")
-    )
-}
-
-// Composable function to display the list of users
-@Composable
-fun UserList(users: List<User>) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        // Iterate over the list of users
-        items(users) { user ->
-            // Display each user using the UserItem composable
-            UserItem(user)
-        }
-    }
-}
-
-// Composable function to display individual user items
-@Composable
-fun UserItem(user: User) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .background(Color.LightGray)                // Background color for the item
-            .clip(RoundedCornerShape(1.dp))            // Rounded corners
-    ) {
-        // Display the user's name
-        Text(
-            text = user.name,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-        // Display the user's email
-        Text(
-            text = user.email,
-            style = MaterialTheme.typography.bodySmall
-        )
-    }
-}*/
 
     @Preview(showBackground = true)
     @Composable
     fun ScaffoldPreview() {
         ScafoldTheme {
             ScaffoldExample()
-            //NumerList()
-//SimpleStringList()
-            //UserList(getUserData())
         }
     }
